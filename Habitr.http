@@ -1,0 +1,6 @@
+@Habitr_HostAddress = http://localhost:5085
+
+GET {{Habitr_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
