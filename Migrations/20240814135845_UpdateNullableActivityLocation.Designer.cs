@@ -4,6 +4,7 @@ using Habitr.src.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Habitr.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240814135845_UpdateNullableActivityLocation")]
+    partial class UpdateNullableActivityLocation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,7 +40,7 @@ namespace Habitr.Migrations
                     b.Property<DateTime>("End")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int?>("GeoLocationId")
+                    b.Property<int?>("LocationId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -49,8 +52,7 @@ namespace Habitr.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GeoLocationId")
-                        .IsUnique();
+                    b.HasIndex("LocationId");
 
                     b.ToTable("Activities");
                 });
@@ -102,11 +104,11 @@ namespace Habitr.Migrations
 
             modelBuilder.Entity("Habitr.src.Models.Activity", b =>
                 {
-                    b.HasOne("Habitr.src.Models.GeoLocation", "GeoLocation")
-                        .WithOne()
-                        .HasForeignKey("Habitr.src.Models.Activity", "GeoLocationId");
+                    b.HasOne("Habitr.src.Models.GeoLocation", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId");
 
-                    b.Navigation("GeoLocation");
+                    b.Navigation("Location");
                 });
 
             modelBuilder.Entity("Habitr.src.Models.Remark", b =>

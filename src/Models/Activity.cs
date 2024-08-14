@@ -7,7 +7,12 @@
 		public string Description { get; set; }
 		public DateTime Start { get; set; }
 		public DateTime End { get; set; }
-		public GeoLocation Location { get; set; }
-		public ICollection<Remark> Remarks { get; set; }
+
+		// Foreign key properties
+		public int? GeoLocationId { get; set; }
+
+		// Navigation properties
+		public GeoLocation? GeoLocation { get; set; }
+		public ICollection<Remark>? Remarks { get; set; }
 	}
 }

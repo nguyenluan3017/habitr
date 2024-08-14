@@ -21,6 +21,11 @@ namespace Habitr.src.Data
                 .HasMany(a => a.Remarks)
                 .WithOne(r => r.Activity)
                 .HasForeignKey(r => r.ActivityId);
+
+            modelBuilder.Entity<Activity>()
+				.HasOne(a => a.GeoLocation)
+				.WithOne()
+				.HasForeignKey<Activity>(a => a.GeoLocationId);
         }        
     }
 }
